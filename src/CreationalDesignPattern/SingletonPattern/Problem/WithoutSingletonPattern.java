@@ -1,4 +1,4 @@
-package CreationalDesignPattern.SingletonPattern;
+package CreationalDesignPattern.SingletonPattern.Problem;
 
 public class WithoutSingletonPattern {
     public static void main(String[] args) {

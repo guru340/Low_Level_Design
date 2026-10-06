@@ -1,4 +1,4 @@
-package CreationalDesignPattern.SingletonPattern;
+package CreationalDesignPattern.SingletonPattern.Problem;
 
 public class AppSetting {
     private String databaseUrl;
