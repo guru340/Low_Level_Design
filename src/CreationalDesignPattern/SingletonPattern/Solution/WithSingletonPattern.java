@@ -12,7 +12,6 @@ public class WithSingletonPattern {
         System.out.println(appSetting.getApikey());
         System.out.println(appSetting1.getApikey());
 
-//        More Memory
         System.out.println(appSetting==appSetting1);
     }
 }
