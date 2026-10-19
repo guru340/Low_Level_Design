@@ -2,12 +2,11 @@ package StructuralDesignPattern.ProxyPattern.Solution;
 
 public class Client {
     public static void main(String[] args) {
-        Image img1 = new RealImage("dog.png");
-        Image img2 = new RealImage("cat.png");
-        //Here, the RealImage is loaded every time we create it,
-        // which can be inefficient if the image is not always required.
+        Image img1 = new ProxyImage("dog.png");
+        Image img2 = new ProxyImage("cat.png");
+
         img1.display();
-        img1.display();
+        img2.display();
 
     }
 }
