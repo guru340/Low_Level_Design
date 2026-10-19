@@ -10,7 +10,7 @@ public class SendGridAdapter implements NotificationService {
 
     @Override
     public void send(String to, String subject, String body) {
-//        Adapter Method -> conver parameters and calls to SendGrid Method
+//        Adapter Method -> convert parameters and calls to SendGrid Method
         sendGridService.send(to,subject,body);
     }
 }
