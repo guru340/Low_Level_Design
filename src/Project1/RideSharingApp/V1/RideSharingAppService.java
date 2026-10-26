@@ -33,29 +33,28 @@ public class RideSharingAppService {
 //            0(N) Brute Force
             Driver assignedDriver=null;
             double minDistance=Double.MAX_VALUE;
-
+            boolean status=true;
             for(Driver driver:drivers){
-                double currentDriverDistance= calcDistance(passenger.getLocation(),Driver.getLocation());
-                if (currentDriverDistance<minDistance){
-                    minDistance=currentDriverDistance;
-                    assignedDriver=driver;
+                if(status){
+                    driver.setStatus(DriverStatus.AVAILABLE);
+                    double currentDriverDistance= calcDistance(passenger.getLocation(),Driver.getLocation());
+                    if (currentDriverDistance<minDistance){
+                        minDistance=currentDriverDistance;
+                        assignedDriver=driver;
+                    }
                 }
+                else{
+                    driver.setStatus(DriverStatus.BOOKED);
+                }
+
 
             }
 
 //            calculate fare
             double expectedFare= calcFare(assignedDriver.getVehicle(),distance);
 
-            //   Track the Driver Status Booked/driver
-            boolean status=true;
-            for(Driver driver:drivers){
-                if(status){
-                   driver.setStatus(DriverStatus.AVAILABLE);
-                }
-                else{
-                    driver.setStatus(DriverStatus.BOOKED);
-                }
-            }
+
+
 
 
 
