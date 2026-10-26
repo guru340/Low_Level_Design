@@ -4,7 +4,7 @@ import java.util.Locale;
 
 public class Driver {
      String name;
-    Location location;
+    static Location location;
     Vehicle vehicle;
 
     public Driver(String name, Location location, Vehicle vehicle) {
