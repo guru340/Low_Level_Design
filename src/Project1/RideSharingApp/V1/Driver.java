@@ -7,4 +7,9 @@ public class Driver {
     Location location;
     Vehicle vehicle;
 
+    public Driver(String name, Location location, Vehicle vehicle) {
+        this.name = name;
+        this.location = location;
+        this.vehicle = vehicle;
+    }
 }
