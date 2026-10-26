@@ -27,7 +27,7 @@ public class Location {
         this.longittude = longittude;
     }
 
-    private double calcDistance(Location location) {
+    public double calcDistance(Location location) {
 //        Euclidean distance
         double dx=this.getLatitude()-location.getLatitude();
         double dy=this.getLongittude()-location.getLongittude();

@@ -17,4 +17,9 @@ public class Driver extends User{
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
+
+    @Override
+    public String notify(String msg) {
+        return msg;
+    }
 }

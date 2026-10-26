@@ -37,4 +37,6 @@ abstract class User {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public abstract String notify(String msg);
 }

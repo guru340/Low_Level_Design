@@ -5,4 +5,9 @@ public class Passenger extends  User{
         super(name, email, location);
     }
 
+    @Override
+    public String notify(String msg) {
+        return msg;
+    }
+
 }
