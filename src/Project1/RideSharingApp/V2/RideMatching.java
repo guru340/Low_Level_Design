@@ -12,7 +12,7 @@ public class RideMatching {
         availblefdrivers.add(driver);
     }
 
-    public void requestRide(Vehicle vehicle,Passenger passenger,double distance,FareStratergy fareStratergy){
+    public void requestRide(Passenger passenger,double distance,FareStratergy fareStratergy){
         if(availblefdrivers.isEmpty()){
             passenger.notify("No drivers are unavailable");
             return;
@@ -27,8 +27,8 @@ public class RideMatching {
         ride.calculateFare();
 
 
-        passenger.notify("Ride scheduled with fare + Rs " +ride.getFare());
-        nearestDriver.notify("You have a new ride request for " +ride.getFare());
+        passenger.notify("Ride scheduled with fare  Rs " + ride.getFare());
+        nearestDriver.notify("You have a new ride request for " + ride.getFare());
 
         //        change the status of Ride
         ride.updateStatus(RideStatus.ONGOING);

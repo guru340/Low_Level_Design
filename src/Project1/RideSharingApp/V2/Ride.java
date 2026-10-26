@@ -32,7 +32,7 @@ public class Ride {
     }
 
     private void notifyUser(RideStatus status) {
-        passenger.notify("Your ride is + " + status);
+        passenger.notify("Your ride is  " + status);
         driver.notify("Ride Status : " + status);
     }
 

@@ -38,5 +38,5 @@ abstract class User {
         this.location = location;
     }
 
-    public abstract String notify(String msg);
+    public abstract void notify(String msg);
 }
