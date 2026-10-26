@@ -1,6 +1,6 @@
 package Project1.RideSharingApp.V2;
 
-import Project1.RideSharingApp.V1.Vehicle;
+
 
 public class Driver extends User{
 
