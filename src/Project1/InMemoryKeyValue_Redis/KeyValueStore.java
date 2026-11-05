@@ -18,7 +18,14 @@ public class KeyValueStore {
     }
 
     public List<String> search(String attributesKey, String attributesValue){
-
+        List<String> matchingKeys = new ArrayList<>();
+        for(Map.Entry<String ,valueofObject> entry: store.entrySet()) {
+            Object value = entry.getValue().getAttributes().get(attributesKey);
+            if(value != null && attributesValue.equals(value.toString())){
+                matchingKeys.add(entry.getKey());
+            }
+        }
+        return matchingKeys;
     }
 
     public void put(String key,List<Pair<String ,String>> listofAttributes){
