@@ -5,40 +5,60 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class KeyValueStore {
 
     private final Map<String, valueofObject> store=new ConcurrentHashMap<>();
     private final Map<String, Class<?>> attributeTypeRegistry = new ConcurrentHashMap<>();
 
+    private final ReentrantReadWriteLock reentrantLock=new ReentrantReadWriteLock();
 
     public Map<String,Object> get(String key){
-        if(store.containsKey(key)){
-            return store.get(key).getAttributes();
+        reentrantLock.readLock().lock();
+        try {
+            if(store.containsKey(key)){
+                return store.get(key).getAttributes();
+            }
+            return null;
+        }finally {
+            reentrantLock.readLock().unlock();
+
         }
-        return null;
+
     }
 
     public List<String> search(String attributesKey, String attributesValue){
-        List<String> matchingKeys = new ArrayList<>();
-        for(Map.Entry<String ,valueofObject> entry: store.entrySet()) {
-            Object value = entry.getValue().getAttributes().get(attributesKey);
-            if(value != null && attributesValue.equals(value.toString())){
-                matchingKeys.add(entry.getKey());
-            }
-        }
-        return matchingKeys;
+        reentrantLock.readLock().lock();
+       try {
+           List<String> matchingKeys = new ArrayList<>();
+           for(Map.Entry<String ,valueofObject> entry: store.entrySet()) {
+               Object value = entry.getValue().getAttributes().get(attributesKey);
+               if(value != null && attributesValue.equals(value.toString())){
+                   matchingKeys.add(entry.getKey());
+               }
+           }
+           return matchingKeys;
+       }finally {
+           reentrantLock.readLock().unlock();
+       }
     }
 
     public void put(String key,List<Pair<String ,String>> listofAttributes){
-        Map<String,Object> attributes=new HashMap<>();
-        for(Pair<String,String> pair:listofAttributes){
-            String attributeskey=pair.getK();
-            String attributevalue=pair.getV();
+        reentrantLock.writeLock().lock();
+       try{
+           Map<String,Object> attributes=new HashMap<>();
+           for(Pair<String,String> pair:listofAttributes){
+               String attributeskey=pair.getK();
+               String attributevalue=pair.getV();
 
-            attributes.put(attributeskey,determineTypeOfAttributeValue(attributeskey,attributevalue));
-        }
-        store.put(key,new valueofObject(attributes));
+               attributes.put(attributeskey,determineTypeOfAttributeValue(attributeskey,attributevalue));
+           }
+           store.put(key,new valueofObject(attributes));
+       }finally {
+            reentrantLock.writeLock().lock();
+       }
     }
 
     private Object determineTypeOfAttributeValue(String attributeKey,String attributeValue) {
@@ -68,11 +88,23 @@ public class KeyValueStore {
     }
 
     public void delete(String key){
-        store.remove(key);
+        reentrantLock.writeLock().lock();
+        try {
+            store.remove(key);
+        }finally {
+            reentrantLock.writeLock().unlock();
+        }
+
 
     }
 
     public List<String> keys(){
-    return new ArrayList<>(store.keySet());
+        reentrantLock.readLock().lock();
+        try {
+            return new ArrayList<>(store.keySet());
+        }finally {
+            reentrantLock.readLock().unlock();
+        }
+
     }
 }
