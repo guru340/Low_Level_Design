@@ -1,5 +1,6 @@
 package Project1.InMemoryKeyValue_Redis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,11 @@ public class KeyValueStore {
     }
 
     public void delete(String key){
+        store.remove(key);
 
     }
 
     public List<String> keys(){
-
+    return new ArrayList<>(store.keySet());
     }
 }
