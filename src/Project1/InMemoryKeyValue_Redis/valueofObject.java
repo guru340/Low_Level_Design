@@ -14,4 +14,12 @@ public class valueofObject {
     public Map<String, Object> getAttributes() {
         return attributes;
     }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(Map.Entry<String, Object> entry: attributes.entrySet()) {
+            sb.append(entry.getKey()).append(":").append(entry.getValue()).append(",");
+        }
+        return sb.toString();
+    }
 }
