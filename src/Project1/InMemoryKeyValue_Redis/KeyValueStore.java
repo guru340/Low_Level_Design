@@ -1,5 +1,6 @@
 package Project1.InMemoryKeyValue_Redis;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,7 +21,18 @@ public class KeyValueStore {
     }
 
     public void put(String key,List<Pair<String ,String>> listofAttributes){
+        Map<String,Object> attributes=new HashMap<>();
+        for(Pair<String,String> pair:listofAttributes){
+            String attributeskey=pair.getK();
+            String attributevalue=pair.getV();
 
+            attributes.put(attributeskey,determineTypeOfAttributeValue(attributevalue));
+        }
+        store.put(key,new valueofObject(attributes));
+    }
+
+    private Object determineTypeOfAttributeValue(String attributevalue) {
+        return attributevalue;
     }
 
     public void delete(String key){
